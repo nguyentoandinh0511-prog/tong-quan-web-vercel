@@ -122,11 +122,15 @@ export function RepositoryCard({ repo, onPreviewClick, onQuickView }: Repository
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Button variant="ghost" size="icon" className="h-9 w-9 text-secondary-foreground hover:bg-white/50 rounded-full" disabled={!preview?.url} asChild>
-                    <a href={preview?.url} target="_blank" rel="noopener noreferrer">
+                  {preview?.url ? (
+                    <a href={preview.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center h-9 w-9 text-secondary-foreground hover:bg-white/50 rounded-full cursor-pointer transition-colors">
                       <ExternalLink className="w-4 h-4" />
                     </a>
-                  </Button>
+                  ) : (
+                    <span className="inline-flex items-center justify-center h-9 w-9 text-secondary-foreground/50 rounded-full cursor-not-allowed">
+                      <ExternalLink className="w-4 h-4" />
+                    </span>
+                  )}
                 </TooltipTrigger>
                 <TooltipContent>Mở Website</TooltipContent>
               </Tooltip>
@@ -135,11 +139,9 @@ export function RepositoryCard({ repo, onPreviewClick, onQuickView }: Repository
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Button variant="ghost" size="icon" className="h-9 w-9 text-secondary-foreground hover:bg-white/50 rounded-full" asChild>
-                    <a href={repo.url} target="_blank" rel="noopener noreferrer">
-                      <Github className="w-4 h-4" />
-                    </a>
-                  </Button>
+                  <a href={repo.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center h-9 w-9 text-secondary-foreground hover:bg-white/50 rounded-full cursor-pointer transition-colors">
+                    <Github className="w-4 h-4" />
+                  </a>
                 </TooltipTrigger>
                 <TooltipContent>GitHub Repository</TooltipContent>
               </Tooltip>
