@@ -1,26 +1,153 @@
 @import "tailwindcss";
 
+@plugin 'tailwindcss-animate';
+
+@custom-variant dark (&:is(.dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Core colors */
+  --background: #f7fbff;
+  --foreground: #10243e;
+  
+  /* Crystal White custom variables */
+  --background-pure: #ffffff;
+  --surface-crystal: rgba(255, 255, 255, 0.72);
+  --surface-strong: rgba(255, 255, 255, 0.92);
+  --surface-soft-blue: rgba(235, 247, 255, 0.66);
+  --border-crystal: rgba(255, 255, 255, 0.86);
+  --border-cool: rgba(167, 206, 230, 0.42);
+  --text-primary: #10243e;
+  --text-secondary: #5f7288;
+  --text-muted: #8fa1b3;
+  --accent: #4ba8e8;
+  --accent-strong: #2389d7;
+  --accent-soft: #dff3ff;
+  --success: #21a66f;
+  --warning: #d89b22;
+  --danger: #e05262;
+  --shadow-crystal: 0 18px 50px rgba(76, 128, 166, 0.12);
+
+  /* shadcn variables */
+  --card: var(--surface-strong);
+  --card-foreground: var(--foreground);
+  --popover: var(--surface-strong);
+  --popover-foreground: var(--foreground);
+  --primary: var(--accent-strong);
+  --primary-foreground: #ffffff;
+  --secondary: var(--surface-soft-blue);
+  --secondary-foreground: var(--foreground);
+  --muted: #f7fbff;
+  --muted-foreground: var(--text-muted);
+  --destructive: var(--danger);
+  --destructive-foreground: #ffffff;
+  --border: var(--border-cool);
+  --input: var(--border-cool);
+  --ring: var(--accent);
+  --radius: 1.25rem; /* 20px for Crystal White UI */
+}
+
+.dark {
+  /* Minimal dark mode support as requested (fallback, not main focus) */
+  --background: #0f172a;
+  --foreground: #f8fafc;
+  --card: rgba(30, 41, 59, 0.7);
+  --card-foreground: #f8fafc;
+  --popover: rgba(30, 41, 59, 0.9);
+  --popover-foreground: #f8fafc;
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --secondary: rgba(51, 65, 85, 0.6);
+  --secondary-foreground: #f8fafc;
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: rgba(148, 163, 184, 0.2);
+  --input: rgba(148, 163, 184, 0.2);
+  --ring: #3b82f6;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: #ffffff;
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-sm: calc(var(--radius) - 8px);
+  
+  /* Additional Crystal White Colors */
+  --color-crystal: var(--surface-crystal);
+  --color-crystal-strong: var(--surface-strong);
+  --color-border-crystal: var(--border-crystal);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  
+  --shadow-crystal: var(--shadow-crystal);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased min-h-screen relative overflow-x-hidden;
+  }
+  
+  /* Background glowing effects */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -20vh;
+    left: -20vw;
+    width: 60vw;
+    height: 60vh;
+    background: radial-gradient(circle, rgba(167, 206, 230, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+    pointer-events: none;
+  }
+  
+  body::after {
+    content: '';
+    position: fixed;
+    bottom: -30vh;
+    right: -10vw;
+    width: 70vw;
+    height: 70vh;
+    background: radial-gradient(circle, rgba(223, 243, 255, 0.4) 0%, transparent 60%);
+    border-radius: 50%;
+    z-index: -1;
+    pointer-events: none;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Utilities for Glassmorphism */
+@layer utilities {
+  .glass-card {
+    @apply bg-crystal/70 backdrop-blur-md border border-crystal-strong/80 shadow-crystal;
+  }
+  
+  .glass-panel {
+    @apply bg-crystal-strong/90 backdrop-blur-xl border border-crystal-strong/80 shadow-crystal;
+  }
+  
+  .glass-pill {
+    @apply bg-white/60 backdrop-blur-sm border border-white/80 shadow-sm rounded-full;
+  }
 }
