@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { formatDistanceToNow } from "date-fns";
-import { ExternalLink, Github, Copy, MoreHorizontal, Check, RefreshCw, Star, Info } from "lucide-react";
+import { ExternalLink, GitBranch as Github, Copy, MoreHorizontal, Check, RefreshCw, Star, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {

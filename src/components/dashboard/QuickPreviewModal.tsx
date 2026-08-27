@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { X, ExternalLink, Github, Copy, RefreshCw, Share2, Star } from "lucide-react";
+import { X, ExternalLink, GitBranch as Github, Copy, RefreshCw, Share2, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
